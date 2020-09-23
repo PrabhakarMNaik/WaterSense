@@ -22,26 +22,26 @@ Our algorithm on a higher level finds the water body in the pixel space and gets
 
 Inputs: Path, Row, timeFrame, cloud cover, ReqX, ReqY
 Hyperparameters: offset, numClusters, numPixels, varBound
-- Set: $`imageCollection \leftarrow`$ as a set of Scenes for the given (Path, Row, timeFrame, cloud cover). [1](#Aquiring-Images)
-- Set: $`minCC :=`$ Index of Scene with minimum cloud cover $`\in imageCollection`$ [2](#Finding-the-minCC)
-- Set: $`image_{minCC} \leftarrow`$ ImageCollection\[minCC\] as numpy.ndarray [3](#Converting-$image_{minCC}$-to-np.ndarray)
-- Identify: $`cnt \leftarrow`$ as a set of contours in $`image_{minCC}`$ [4](#Helper-function:-detecting-Contours,-Rectangles)
-- Set: $`contour_{required}:= argmin_{i} Distance((reqX, reqY), centre_{contour_i})`$ for $`contour_i \in cn`t$ [4](#Helper-function:-detecting-Contours,-Rectangles)
-- identify: $` rect_{required}:=[x, y, width, height] `$ for the bounding rectangle of $`contour_{required}`$ with offset [4](#Helper-function:-detecting-Contours,-Rectangles)
-- Project: $`roi := rect_{required} `$ as an earth engine object.[5](#Reprojecting-to-the-geographic-space)
-- Sample: sampleTraining := points $` \in image_{minCC}`$ as set. $`\|sampleTraining\| = numPixels`$ [6](#Getting-Training-Sasmple)
-- Train: classifier on the for numClusters over $`sampleTraining`$ [6](#Getting-Training-Sasmple)
-- For each $`image \in imageCollection`$ :
-    - Clip: $`image`$ to $`Roi`$
-    - Classify: $`points \in image`$ into numClusters
-    - Set: $`kNDWI := \{ Ndwi_i\}_{i = 0}^{numClusters}`$ [7](#Helper-Function:-Calculating-the-NDWI-for-each-layer)
-    - $`waterCluster := max_{i}(kNDWI)`$
-    - Compute: $`area_{image} := PixelArea(waterCluster)`$.[8](#Helper-Function:-Cluster-Area-calculator)
-    - if $`(area_{image} - area_{image_{minCC}}) \leq varBound`$:
-        - $`areaHistory \leftarrow area_{image}`$
+- Set: `imageCollection \leftarrow` as a set of Scenes for the given (Path, Row, timeFrame, cloud cover).
+- Set: `minCC :=` Index of Scene with minimum cloud cover `\in imageCollection` 
+- Set: `image_{minCC} \leftarrow` ImageCollection\[minCC\] as numpy.ndarray
+- Identify: `cnt \leftarrow` as a set of contours in `image_{minCC}`
+- Set: `contour_{required}:= argmin_{i} Distance((reqX, reqY), centre_{contour_i})` for `contour_i \in cnt`
+- identify: ` rect_{required}:=[x, y, width, height] ` for the bounding rectangle of `$contour_{required}$` with offset
+- Project: `roi := rect_{required} ` as an earth engine object.
+- Sample: sampleTraining := points ` \in image_{minCC}` as set. `\|sampleTraining\| = numPixels`
+- Train: classifier on the for numClusters over `sampleTraining`
+- For each `image \in imageCollection` :
+    - Clip: `image` to `Roi`
+    - Classify: `points \in image` into numClusters
+    - Set: `kNDWI := \{ Ndwi_i\}_{i = 0}^{numClusters}`
+    - `waterCluster := max_{i}(kNDWI)`
+    - Compute: `area_{image} := PixelArea(waterCluster)`.
+    - if `(area_{image} - area_{image_{minCC}}) \leq varBound`:
+        - `areaHistory \leftarrow area_{image}`
     - End of if
 - End of For
-- Plot: $`AreaHistory`$ [9](#Plotting-the-Results)
+- Plot: `AreaHistory`
 
 <center>
 
@@ -50,16 +50,8 @@ Hyperparameters: offset, numClusters, numPixels, varBound
 
 </center>
 
-The local variables identifiers are in camel case with lowercase initials $trainingSample$. Functions are in camel case with uppercase initials $ProjectRect$. Global variables are in All capitals. The program is will work in python3.x and will use following packages:
-- [numpy](https://numpy.org/)
-- [ee](https://developers.google.com/earth-engine/guides/python_install#install-options) 
-  For using any method in Earth engine library, an Earth Engine [account](https://earthengine.google.com/) is needed.  
-- [IPython.display](https://ipython.org/)
-- [matplotlib](https://matplotlib.org/)
-- [geemap](https://github.com/giswqs/geemap)
-- [cv2](https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html)
-- [math](https://docs.python.org/3/library/math.html)
-- [urllib](https://docs.python.org/3/library/urllib.html)
+The local variables identifiers are in camel case with lowercase initials trainingSample. Functions are in camel case with uppercase initials $ProjectRect$. Global variables are in All capitals. The program is will work in python3.x and will use following packages:
+- [numpy](https://numpy.org/), [ee](https://developers.google.com/earth-engine/guides/python_install#install-options) For using any method in Earth engine library, an Earth Engine [account](https://earthengine.google.com/) is needed. [IPython.display](https://ipython.org/), [matplotlib](https://matplotlib.org/), [geemap](https://github.com/giswqs/geemap), [cv2](https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html), [math](https://docs.python.org/3/library/math.html), [urllib](https://docs.python.org/3/library/urllib.html)
 
 <center>
 
