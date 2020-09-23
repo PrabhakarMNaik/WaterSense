@@ -22,7 +22,7 @@ Our algorithm on a higher level finds the water body in the pixel space and gets
 
 Inputs: Path, Row, timeFrame, cloud cover, ReqX, ReqY
 Hyperparameters: offset, numClusters, numPixels, varBound
-- Set: $imageCollection \leftarrow$ as a set of Scenes for the given (Path, Row, timeFrame, cloud cover). [1](#Aquiring-Images)
+- Set: $'imageCollection \leftarrow'$ as a set of Scenes for the given (Path, Row, timeFrame, cloud cover). [1](#Aquiring-Images)
 - Set: $minCC :=$ Index of Scene with minimum cloud cover $\in imageCollection$ [2](#Finding-the-minCC)
 - Set: $image_{minCC} \leftarrow$ ImageCollection\[minCC\] as numpy.ndarray [3](#Converting-$image_{minCC}$-to-np.ndarray)
 - Identify: $cnt \leftarrow$ as a set of contours in $image_{minCC}$ [4](#Helper-function:-detecting-Contours,-Rectangles)
