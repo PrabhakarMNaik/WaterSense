@@ -22,26 +22,26 @@ Our algorithm on a higher level finds the water body in the pixel space and gets
 
 Inputs: Path, Row, timeFrame, cloud cover, ReqX, ReqY
 Hyperparameters: offset, numClusters, numPixels, varBound
-- Set: $'imageCollection \leftarrow'$ as a set of Scenes for the given (Path, Row, timeFrame, cloud cover). [1](#Aquiring-Images)
-- Set: $minCC :=$ Index of Scene with minimum cloud cover $\in imageCollection$ [2](#Finding-the-minCC)
-- Set: $image_{minCC} \leftarrow$ ImageCollection\[minCC\] as numpy.ndarray [3](#Converting-$image_{minCC}$-to-np.ndarray)
-- Identify: $cnt \leftarrow$ as a set of contours in $image_{minCC}$ [4](#Helper-function:-detecting-Contours,-Rectangles)
-- Set: $contour_{required}:= argmin_{i} Distance((reqX, reqY), centre_{contour_i})$ for $contour_i \in cnt$ [4](#Helper-function:-detecting-Contours,-Rectangles)
-- identify: $ rect_{required}:=[x, y, width, height] $ for the bounding rectangle of $contour_{required}$ with offset [4](#Helper-function:-detecting-Contours,-Rectangles)
-- Project: $roi := rect_{required} $ as an earth engine object.[5](#Reprojecting-to-the-geographic-space)
-- Sample: sampleTraining := points $ \in image_{minCC}$ as set. $\|sampleTraining\| = numPixels$ [6](#Getting-Training-Sasmple)
-- Train: classifier on the for numClusters over $sampleTraining$ [6](#Getting-Training-Sasmple)
-- For each $image \in imageCollection$ :
-    - Clip: $image$ to $Roi$
-    - Classify: $points \in image$ into numClusters
-    - Set: $kNDWI := \{ Ndwi_i\}_{i = 0}^{numClusters}$ [7](#Helper-Function:-Calculating-the-NDWI-for-each-layer)
-    - $waterCluster := max_{i}(kNDWI)$
-    - Compute: $area_{image} := PixelArea(waterCluster)$.[8](#Helper-Function:-Cluster-Area-calculator)
-    - if $(area_{image} - area_{image_{minCC}}) \leq varBound$:
-        - $areaHistory \leftarrow area_{image}$
+- Set: $`imageCollection \leftarrow`$ as a set of Scenes for the given (Path, Row, timeFrame, cloud cover). [1](#Aquiring-Images)
+- Set: $`minCC :=`$ Index of Scene with minimum cloud cover $`\in imageCollection`$ [2](#Finding-the-minCC)
+- Set: $`image_{minCC} \leftarrow`$ ImageCollection\[minCC\] as numpy.ndarray [3](#Converting-$image_{minCC}$-to-np.ndarray)
+- Identify: $`cnt \leftarrow`$ as a set of contours in $`image_{minCC}`$ [4](#Helper-function:-detecting-Contours,-Rectangles)
+- Set: $`contour_{required}:= argmin_{i} Distance((reqX, reqY), centre_{contour_i})`$ for $`contour_i \in cn`t$ [4](#Helper-function:-detecting-Contours,-Rectangles)
+- identify: $` rect_{required}:=[x, y, width, height] `$ for the bounding rectangle of $`contour_{required}`$ with offset [4](#Helper-function:-detecting-Contours,-Rectangles)
+- Project: $`roi := rect_{required} `$ as an earth engine object.[5](#Reprojecting-to-the-geographic-space)
+- Sample: sampleTraining := points $` \in image_{minCC}`$ as set. $`\|sampleTraining\| = numPixels`$ [6](#Getting-Training-Sasmple)
+- Train: classifier on the for numClusters over $`sampleTraining`$ [6](#Getting-Training-Sasmple)
+- For each $`image \in imageCollection`$ :
+    - Clip: $`image`$ to $`Roi`$
+    - Classify: $`points \in image`$ into numClusters
+    - Set: $`kNDWI := \{ Ndwi_i\}_{i = 0}^{numClusters}`$ [7](#Helper-Function:-Calculating-the-NDWI-for-each-layer)
+    - $`waterCluster := max_{i}(kNDWI)`$
+    - Compute: $`area_{image} := PixelArea(waterCluster)`$.[8](#Helper-Function:-Cluster-Area-calculator)
+    - if $`(area_{image} - area_{image_{minCC}}) \leq varBound`$:
+        - $`areaHistory \leftarrow area_{image}`$
     - End of if
 - End of For
-- Plot: $AreaHistory$ [9](#Plotting-the-Results)
+- Plot: $`AreaHistory`$ [9](#Plotting-the-Results)
 
 <center>
 
