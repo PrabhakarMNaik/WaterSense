@@ -51,8 +51,9 @@ Hyperparameters: offset, numClusters, numPixels, varBound
 </center>
 
 The local variables identifiers are in camel case with lowercase initials trainingSample. Functions are in camel case with uppercase initials $ProjectRect$. Global variables are in All capitals. The program is will work in python3.x and will use following packages:
-- [numpy](https://numpy.org/), [ee](https://developers.google.com/earth-engine/guides/python_install#install-options) For using any method in Earth engine library, an Earth Engine [account](https://earthengine.google.com/) is needed. [IPython.display](https://ipython.org/), [matplotlib](https://matplotlib.org/), [geemap](https://github.com/giswqs/geemap), [cv2](https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html), [math](https://docs.python.org/3/library/math.html), [urllib](https://docs.python.org/3/library/urllib.html)
+[numpy](https://numpy.org/), [ee](https://developers.google.com/earth-engine/guides/python_install#install-options), [IPython.display](https://ipython.org/), [matplotlib](https://matplotlib.org/), [geemap](https://github.com/giswqs/geemap), [cv2](https://docs.opencv.org/master/d0/de3/tutorial_py_intro.html), [math](https://docs.python.org/3/library/math.html), [urllib](https://docs.python.org/3/library/urllib.html)
 
+For using any method in Earth engine library, an Earth Engine [account](https://earthengine.google.com/) is needed. 
 <center>
 
 ### Conclusion
